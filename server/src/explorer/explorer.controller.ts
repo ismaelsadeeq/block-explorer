@@ -1,4 +1,7 @@
 import { Controller } from '@nestjs/common';
 
-@Controller('explorer')
-export class ExplorerController {}
+@Controller('api/v1')
+export class ExplorerController {
+
+  
+}
