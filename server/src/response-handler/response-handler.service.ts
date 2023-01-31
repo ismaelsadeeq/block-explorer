@@ -5,7 +5,8 @@ import { Meta, ResponseData } from './interface/response.handler.interface';
 export class ResponseHandlerService {
   data = {};
   meta: Meta = {};
-  
+  public static instance: ResponseHandlerService = new ResponseHandlerService();
+
   constructor() {}
 
   public async responseBody(data?: unknown, meta?: Meta): Promise<ResponseData> {
