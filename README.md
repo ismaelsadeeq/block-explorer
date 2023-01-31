@@ -1,6 +1,5 @@
-# ₿ Btc-api
+# ₿itcoin block explorer
+  The bitcoin signet explorer will provide information about the current signet blockchain, like transaction status, transaction detail, transaction block and block details.
 
-## ₿ API connect to a bitcoin core client
-## ⚝ To interact with the bitcoin network.
-## ⚝ Perform rpc calls to bitcoin core that will.
+- The server folder contains the API project
  
