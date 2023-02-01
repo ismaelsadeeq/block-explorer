@@ -1,7 +1,6 @@
 export interface Meta {
   message?: string | undefined;
-  info?: string | undefined;
-  status?: number | undefined;
+  status?: boolean | undefined;
   pagination?: { page: number; total: number; count: number; size: number };
 }
 
