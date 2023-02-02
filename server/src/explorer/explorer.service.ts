@@ -1,13 +1,10 @@
-import { Injectable, Logger,ForbiddenException } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ResponseData } from 'src/response-handler/interface/response.handler.interface';
 import { ResponseHandlerService } from 'src/response-handler/response-handler.service';
 import { Meta } from 'src/response-handler/interface/response.handler.interface';
 import { HttpService } from '@nestjs/axios';
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import  { AxiosError } from 'axios';
 import { configData, getConfig } from './interface';
-// import { Observable } from 'rxjs/internal/Observable';
-// import { block } from './interface';
-// import { map, catchError } from 'rxjs';
 import { catchError, firstValueFrom } from 'rxjs';
 
 @Injectable()
