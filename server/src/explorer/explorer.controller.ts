@@ -8,7 +8,7 @@ export class ExplorerController {
   ){
   }
 
-  @Get('ten-blocks')
+  @Get('top-blocks')
   @HttpCode(HttpStatus.OK)
   async getBlock(): Promise<any>{
     return await this.explorerService.getTopBlocks()
