@@ -1,4 +1,4 @@
-import { AxiosAdapter, AxiosBasicCredentials, AxiosProxyConfig, AxiosRequestTransformer, AxiosResponseHeaders, AxiosResponseTransformer, CancelToken, InternalAxiosRequestConfig, Method, RawAxiosResponseHeaders, TransitionalOptions } from "axios";
+import { AxiosResponseHeaders, RawAxiosResponseHeaders,} from "axios";
 
 export interface block {
   hash:string,
@@ -35,6 +35,7 @@ export interface responseType<T = any, D = any> {
   status: number;
   statusText: string;
   headers: RawAxiosResponseHeaders | AxiosResponseHeaders;
+
   request?: any;
 }
 export class getConfig {
