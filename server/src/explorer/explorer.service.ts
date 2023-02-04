@@ -12,7 +12,7 @@ export class ExplorerService {
     private readonly bitcoindService:BitcoindInterfaceService
   ){}
 
-  async getTopTenBlocks():Promise<ResponseData>{
+  async getTopBlocks():Promise<ResponseData>{
     try {
       
       const chainTipMethod:string = "getchaintips"
@@ -25,8 +25,8 @@ export class ExplorerService {
       parameters = [currentHash]
       let block = await this.bitcoindService.bitcoindGet(method,parameters)
       blocks.push(block.data.result)
-      
-      for(let i = 0;i<9;i++){
+
+      for(let i = 0;i<4;i++){
         parameters = [block.data.result.previousblockhash]
         block = await this.bitcoindService.bitcoindGet(method,parameters)
         blocks.push(block.data.result)
