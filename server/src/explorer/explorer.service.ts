@@ -1,39 +1,46 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { BitcoindInterfaceService } from 'src/bitcoind-interface/bitcoind-interface.service';
 import { ResponseData } from 'src/response-handler/interface/response.handler.interface';
 import { ResponseHandlerService } from 'src/response-handler/response-handler.service';
 import { Meta } from 'src/response-handler/interface/response.handler.interface';
-import { HttpService } from '@nestjs/axios';
-import  { AxiosError } from 'axios';
-import { configData, getConfig } from './interface';
-import { catchError, firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class ExplorerService {
 
   constructor(
     private readonly responseHandlerService:ResponseHandlerService = ResponseHandlerService.instance,
-    private readonly httpService: HttpService,
+    private readonly bitcoindService:BitcoindInterfaceService
   ){}
 
   async getTopTenBlocks():Promise<ResponseData>{
     try {
       
-      const payload:configData = new getConfig([],"getchaintips").getConfig(); 
+      const chainTipMethod:string = "getchaintips"
+      let parameters:Array<string> = []
+      const chainTip = await this.bitcoindService.bitcoindGet(chainTipMethod,parameters)
+      let currentHash:string = chainTip.data.result[0].hash
+      
+      const blocks = []
+      const method = "getblock"
+      parameters = [currentHash]
+      let block = await this.bitcoindService.bitcoindGet(method,parameters)
+      blocks.push(block.data.result)
+      
+      for(let i = 0;i<9;i++){
+        parameters = [block.data.result.previousblockhash]
+        block = await this.bitcoindService.bitcoindGet(method,parameters)
+        blocks.push(block.data.result)
+      }
 
-      const { data } = await firstValueFrom(
-        this.httpService.post(process.env.URL,JSON.stringify(payload)).pipe(
-          catchError((error: AxiosError) => {
-            Logger.error(error.response.data);
-              throw 'An error happened!';
-            }),
-          ),
-      );
       const response:Meta = {
         status:true,
         message:"success",
         pagination:undefined
       }
-      return this.responseHandlerService.responseBody(data,response)
+
+      return this.responseHandlerService.responseBody(blocks,response);
+
+
     } catch(error:unknown){
       Logger.log(error)
       const response:Meta = {
