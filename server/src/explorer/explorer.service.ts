@@ -124,7 +124,28 @@ export class ExplorerService {
       return this.responseHandlerService.responseBody(undefined,response)
     }
   }
-  
+  async searchBlockHash(hash:string):Promise<ResponseData>{
+    try {
+      const method = 'getblock'
+      const parameters = [hash,true];
+      const block:any =  (await this.bitcoindService.bitcoindGet(method,parameters)).data.result
+      const response:Meta = {
+        status:true,
+        message:"success",
+        pagination:undefined
+      }
+      return this.responseHandlerService.responseBody(block,response);
+
+    } catch (error:unknown) {
+      Logger.log(error)
+      const response:Meta = {
+        status:false,
+        message:"failed to get block",
+        pagination:undefined
+      }
+      return this.responseHandlerService.responseBody(undefined,response)
+    }
+  }
 
 
 }
