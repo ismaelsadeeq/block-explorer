@@ -15,10 +15,10 @@ export class ExplorerService {
   async getTopBlocks():Promise<ResponseData>{
     try {
       
-      const chainTipMethod:string = "getchaintips"
+      const chainTipMethod:string = "getbestblockhash"
       let parameters:Array<string> = []
       const chainTip = await this.bitcoindService.bitcoindGet(chainTipMethod,parameters)
-      let currentHash:string = chainTip.data.result[0].hash
+      let currentHash:string = chainTip.data.result
       
       const blocks:Array<any> = []
       const method:string = "getblock"
@@ -94,6 +94,7 @@ export class ExplorerService {
       return this.responseHandlerService.responseBody(undefined,response)
     }
   }
+  
 
 
 }
