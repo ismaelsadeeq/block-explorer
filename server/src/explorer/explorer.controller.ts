@@ -32,4 +32,10 @@ export class ExplorerController {
     return this.explorerService.searchBlockHash(hash)
 
   }
+  @Get('search-transaction/:txId')
+  @HttpCode(HttpStatus.OK)
+  async searchTransactionId(@Param('txId') txId:string): Promise<ResponseData> {
+    return this.explorerService.searchForTransactionId(txId)
+
+  }
 }
