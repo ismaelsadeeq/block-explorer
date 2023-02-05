@@ -97,6 +97,7 @@ export class ExplorerService {
       return this.responseHandlerService.responseBody(undefined,response)
     }
   }
+
   async searchBlockHeight(height:number):Promise<ResponseData>{
     try {
       let method:string = "getblockhash"
@@ -124,6 +125,7 @@ export class ExplorerService {
       return this.responseHandlerService.responseBody(undefined,response)
     }
   }
+
   async searchBlockHash(hash:string):Promise<ResponseData>{
     try {
       const method = 'getblock'
@@ -147,5 +149,28 @@ export class ExplorerService {
     }
   }
 
+  async searchForTransactionId(transactionId:string):Promise<ResponseData>{
+    try  {
+      const method = 'getrawtransaction';
+      const parameters = [transactionId]
+      const block = (await this.bitcoindService.bitcoindGet(method,parameters)).data.result
+  
+      const response:Meta = {
+        status:true,
+        message:"success",
+        pagination:undefined
+      }
 
+      return this.responseHandlerService.responseBody(block,response);
+
+    }catch(error:unknown){
+      Logger.log(error)
+      const response:Meta = {
+        status:false,
+        message:"failed to get transactions",
+        pagination:undefined
+      }
+      return this.responseHandlerService.responseBody(undefined,response)
+    }
+  }
 }
