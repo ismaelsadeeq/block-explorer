@@ -173,4 +173,28 @@ export class ExplorerService {
       return this.responseHandlerService.responseBody(undefined,response)
     }
   }
+  async getElectrsVersion():Promise<ResponseData>{
+    try  {
+      const parameters:Array<string> = ["", "1.4"]
+      const method:string = "server_version"
+      const block:string = await this.bitcoindService.electr(parameters,method)
+  
+      const response:Meta = {
+        status:true,
+        message:"success",
+        pagination:undefined
+      }
+
+      return this.responseHandlerService.responseBody(block,response);
+
+    }catch(error:unknown){
+      Logger.log(error)
+      const response:Meta = {
+        status:false,
+        message:"failed to get transactions",
+        pagination:undefined
+      }
+      return this.responseHandlerService.responseBody(undefined,response)
+    }
+  }
 }
