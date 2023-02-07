@@ -1,11 +1,13 @@
 import { Injectable, Logger } from '@nestjs/common';
-import  { AxiosError, AxiosResponse } from 'axios';
+import  { AxiosError } from 'axios';
 import { configData, getConfig, responseType } from './interface';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 
+
 @Injectable()
 export class BitcoindInterfaceService {
+  private ElectrumCli:any = require('electrum-client')
 
   constructor(
     private readonly httpService: HttpService,
@@ -22,5 +24,25 @@ export class BitcoindInterfaceService {
         ),
     );
     return response;
+  }
+  async electr(params :Array<string>,method:string): Promise<any> {
+
+    const ecl:any = new this.ElectrumCli(parseInt(process.env.ELECTR_PORT), process.env.ELECTR_HOST, process.env.PROTOCOL) // tcp or tls
+    await ecl.connect() // connect(promise)
+    ecl.subscribe.on(method,(v) => console.log(v)) // subscribe message(EventEmitter)
+    try{
+        const response:any = await ecl.server_version(...params) // json-rpc(promise)
+        await ecl.close()
+        return response
+
+    }catch(e){
+        Logger.log(e)
+        await ecl.close()
+        return {
+          "status":false,
+          "message":e
+        }
+    }
+   
   }
 }
