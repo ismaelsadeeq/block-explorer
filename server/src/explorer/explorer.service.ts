@@ -176,7 +176,7 @@ export class ExplorerService {
   async getElectrsVersion():Promise<ResponseData>{
     try  {
       const parameters:Array<string> = ["", "1.4"]
-      const method:string = "server_version"
+      const method:string = "server.version"
       const block:string = await this.bitcoindService.electr(parameters,method)
   
       const response:Meta = {

@@ -31,7 +31,7 @@ export class BitcoindInterfaceService {
     await ecl.connect() // connect(promise)
     ecl.subscribe.on(method,(v) => console.log(v)) // subscribe message(EventEmitter)
     try{
-        const response:any = await ecl.server_version(...params) // json-rpc(promise)
+        const response:any = await ecl.electr_client(method,params) // json-rpc(promise)
         await ecl.close()
         return response
 
