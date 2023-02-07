@@ -38,4 +38,9 @@ export class ExplorerController {
     return this.explorerService.searchForTransactionId(txId)
 
   }
+  @Get('electrs-version')
+  @HttpCode(HttpStatus.OK)
+  async electrsVersion(): Promise<ResponseData> {
+    return this.explorerService.getElectrsVersion()
+  }
 }
