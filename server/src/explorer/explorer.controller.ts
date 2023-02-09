@@ -38,9 +38,9 @@ export class ExplorerController {
     return this.explorerService.searchForTransactionId(txId)
 
   }
-  @Get('electrs-version')
+  @Get('address-balance/:address')
   @HttpCode(HttpStatus.OK)
-  async electrsVersion(): Promise<ResponseData> {
-    return this.explorerService.getElectrsVersion()
+  async getAddressBalance(@Param('address') adress:string): Promise<ResponseData> {
+    return this.explorerService.getAddressBalance(adress)
   }
 }
