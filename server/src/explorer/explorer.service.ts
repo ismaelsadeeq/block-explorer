@@ -15,6 +15,7 @@ export class ExplorerService {
   private readonly OP_EQUALVERIFY:string = "88";
   private readonly OP_CHECKSIG:string ="ac"
   private readonly TO_PUSH:string = '14'
+  private readonly OP_EQUAL:string = "87"
   constructor(
     private readonly responseHandlerService:ResponseHandlerService = ResponseHandlerService.instance,
     private readonly bitcoindService:BitcoindInterfaceService
@@ -194,7 +195,6 @@ export class ExplorerService {
         message:"success",
         pagination:undefined
       }
-
       return this.responseHandlerService.responseBody(block,response);
 
     }catch(error:unknown){
@@ -215,7 +215,7 @@ export class ExplorerService {
       }
       // To be implemented
       case "3":{
-        return "script"
+        return this.getP2SH(address)
       }
       // To be implemeted
       case "b":{
@@ -235,11 +235,21 @@ export class ExplorerService {
     .update(Buffer.from(scriptPubKey, 'hex'))
     .digest('hex');
 
-    //Reverse the hash of the scriptPubKey
-    scriptPubKey = this.reverseHash(scriptPubKey)
+    //Reverse and return  the hash of the scriptPubKey
+    return this.reverseHash(scriptPubKey);
+  }
+  getP2SH(address:string):string {
 
-    //Return the reversed hash as the script pub key.
-    return scriptPubKey
+    let {data}:decodedBase58Check = this.base58check.decode(address,'hex')
+
+    let scriptHash:string = this.OP_HASH160 + this.TO_PUSH + data + this.OP_EQUAL;
+
+    scriptHash = crypto.createHash('sha256')
+    .update(Buffer.from(scriptHash,'hex'))
+    .digest('hex')
+
+    return this.reverseHash(scriptHash)
+
   }
   reverseHash(scriptHash:string):string{
     //create reversed hash string
@@ -263,3 +273,4 @@ export class ExplorerService {
     return reversedHash;
   }
 }
+
