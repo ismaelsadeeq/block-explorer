@@ -43,4 +43,9 @@ export class ExplorerController {
   async getAddressBalance(@Param('address') adress:string): Promise<ResponseData> {
     return this.explorerService.getAddressBalance(adress)
   }
+  @Get('address-transactions/:address')
+  @HttpCode(HttpStatus.OK)
+  async getAddressTransactions(@Param('address') address:string):Promise<ResponseData>{
+    return this.explorerService.getAddressTransactions(address);
+  }
 }
