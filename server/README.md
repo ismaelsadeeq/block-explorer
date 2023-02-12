@@ -1,6 +1,8 @@
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Explore-btc block explorer backend source code.
+
+- Built with [nestjs](https://nestjs.com/)
 
 ## Installation
 
