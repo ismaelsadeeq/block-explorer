@@ -9,7 +9,6 @@ import { Divider } from '@mui/material';
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary">
-      {'Copyright © '}
       <Link color="inherit" href="https://qala.dev/">
         Qala
       </Link>{' '}
@@ -40,8 +39,10 @@ export default function Footer() {
         <Container maxWidth="sm">
           <Typography variant="body1">
             Bitcoin Blockchain Explorer
-            Network Signet
 
+          </Typography>
+          <Typography variant="body1">
+            Signet Network
           </Typography>
           <Copyright />
         </Container>
