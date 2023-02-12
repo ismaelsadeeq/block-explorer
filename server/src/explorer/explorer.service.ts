@@ -7,8 +7,11 @@ import { responseType } from 'src/bitcoind-interface/interface';
 import { decodedBase58Check } from './interface';
 import * as crypto from 'crypto';
 import { bech32, Decoded } from 'bech32';
+
+
 @Injectable()
 export class ExplorerService {
+
   private readonly base58check:any = require('base58check')
   private readonly OP_DUP:string = "76"; 
   private readonly OP_HASH160:string = "a9";
@@ -188,7 +191,6 @@ export class ExplorerService {
   async getAddressBalance(address:string):Promise<ResponseData>{
     try  {
       const scriptHash:string = this.scriptHash(address);
-      Logger.log(scriptHash)
       const parameters:Array<string> = [scriptHash];
 
       const method:string = "blockchain.scripthash.get_balance";
@@ -211,18 +213,64 @@ export class ExplorerService {
       return this.responseHandlerService.responseBody(undefined,response)
     }
   }
+  async getAddressTransactions(address:string):Promise<ResponseData>{
+    try  {
+      const scriptHash:string = this.scriptHash(address);
+      const parameters:Array<string> = [scriptHash];
+
+      const method:string = "blockchain.scripthash.get_history";
+      const block:string = await this.bitcoindService.electr(parameters,method)
+  
+      const response:Meta = {
+        status:true,
+        message:"success",
+        pagination:undefined
+      }
+      return this.responseHandlerService.responseBody(block,response);
+
+    }catch(error:unknown){
+      Logger.log(error)
+      const response:Meta = {
+        status:false,
+        message:"failed to get transactions",
+        pagination:undefined
+      }
+      return this.responseHandlerService.responseBody(undefined,response)
+    }
+  }
+
+
+
+
+  //HELPER METHODS FOR CREATING SCRIPT HASH FROM AN ADDRESS
   scriptHash(address:string):string{
     const prefix:string = address.slice(0,1)
     switch(prefix){
-      case  "1":{
+      // P2PKH address types
+      case  "1" :{
         return this.getP2PKH(address);
       }
+      case  "m":{
+        return this.getP2PKH(address);
+      }
+      case  "n":{
+        return this.getP2PKH(address);
+      }
+      // P2SH address types
       case "3":{
         return this.getP2SH(address);
       }
-      case "b":{
+      case "2":{
+        return this.getP2SH(address);
+      }
+      // Pay to Witness address types
+      case "b" :{
         return this.getSegwitAddress(address);
       }
+      case "t":{
+        return this.getSegwitAddress(address);
+      }
+
     }
   }
   getP2PKH(address:string):string{
