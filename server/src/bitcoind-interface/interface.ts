@@ -1,26 +1,9 @@
+//Creating interface for bitcoind interface and axios object types
+
+
 import { AxiosResponseHeaders, RawAxiosResponseHeaders,} from "axios";
 
-export interface block {
-  hash:string,
-  confirmations:number
-  height:number
-  version: number,
-  versionHex: number,
-  merkleroot: string,
-  time: number,
-  mediantime: number,
-  nonce: number,
-  bits: string,
-  difficulty: number,
-  chainwork: string,
-  nTx: number,
-  previousblockhash: string,
-  strippedsize: number,
-  size: number,
-  weight: number,
-  tx: Array<string>
-}
-
+//The bitcoin-d config object variables and their types
 
 export interface configData {
   jsonrpc:string,
@@ -30,14 +13,17 @@ export interface configData {
 }
 
 
+// Creating the axios responseType interface 
 export interface responseType<T = any, D = any> {
   data: T;
   status: number;
   statusText: string;
   headers: RawAxiosResponseHeaders | AxiosResponseHeaders;
-
   request?: any;
 }
+
+
+// Creating a class for initializing and returning instance of config-data for bitcoind
 export class getConfig {
   constructor(
     private readonly params:any[],
