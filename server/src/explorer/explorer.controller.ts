@@ -14,7 +14,7 @@ export class ExplorerController {
   async getTopBlock(): Promise<ResponseData>{
     return await this.explorerService.getTopBlocks()
   }
-  @Get('top-transaction')
+  @Get('top-transactions')
   @HttpCode(HttpStatus.OK)
   async getTopTransaction(): Promise<ResponseData>{
     return await this.explorerService.getTopTransaction()
