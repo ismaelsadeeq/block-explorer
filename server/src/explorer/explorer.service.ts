@@ -74,7 +74,7 @@ export class ExplorerService {
         message:"failed to get blocks",
         pagination:undefined
       }
-      return this.responseHandlerService.responseBody(undefined,response)
+      return this.responseHandlerService.responseBody({},response)
     }
   }
 
@@ -150,7 +150,7 @@ export class ExplorerService {
         message:"failed to get transactions",
         pagination:undefined
       }
-      return this.responseHandlerService.responseBody(undefined,response)
+      return this.responseHandlerService.responseBody({},response)
     }
   }
 
@@ -187,7 +187,7 @@ export class ExplorerService {
         message:"failed to get block",
         pagination:undefined
       }
-      return this.responseHandlerService.responseBody(undefined,response)
+      return this.responseHandlerService.responseBody({},response)
     }
   }
 
@@ -213,7 +213,7 @@ export class ExplorerService {
         message:"failed to get block",
         pagination:undefined
       }
-      return this.responseHandlerService.responseBody(undefined,response)
+      return this.responseHandlerService.responseBody({},response)
     }
   }
 
@@ -242,7 +242,7 @@ export class ExplorerService {
         message:"failed to get transactions",
         pagination:undefined
       }
-      return this.responseHandlerService.responseBody(undefined,response)
+      return this.responseHandlerService.responseBody({},response)
     }
   }
   async getAddressBalance(address:string):Promise<ResponseData>{
@@ -274,7 +274,7 @@ export class ExplorerService {
         message:"failed to get address balance",
         pagination:undefined
       }
-      return this.responseHandlerService.responseBody(undefined,response)
+      return this.responseHandlerService.responseBody({},response)
     }
   }
   async getAddressTransactions(address:string):Promise<ResponseData>{
@@ -305,7 +305,7 @@ export class ExplorerService {
         message:"failed to get transactions",
         pagination:undefined
       }
-      return this.responseHandlerService.responseBody(undefined,response)
+      return this.responseHandlerService.responseBody({},response)
     }
   }
 
