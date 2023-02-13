@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Footer from "../../Layout/Footer"
+import BlocksList from "./BlocksList";
 
 
 
@@ -16,10 +17,12 @@ function DashboardPage() {
       </Helmet>
       <Header />
       <CssBaseline />
-      <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
-        <Typography variant="h2" component="h1" gutterBottom>
-          Body
+      <Container component="main" sx={{ mt: 8, mb: 2}} >
+        <Typography paddingTop={2} variant="h5" component="h1" gutterBottom>
+          Blocks
         </Typography>
+        <BlocksList />
+
       </Container>
       <Footer />
     </>
