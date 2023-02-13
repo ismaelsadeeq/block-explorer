@@ -69,7 +69,7 @@ export default function TransactionList() {
                 {
                   property.title =="Previous Block Hash"?
                     <Link >
-                      <Typography variant='body1' style={{textDecoration:"underline"}}  align="right"> 
+                      <Typography variant='body1' style={{textDecoration:"underline",color:'lightBlue'}}  align="right"> 
                           {property.value}
                     </Typography>
                </Link>:
