@@ -7,26 +7,31 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Typography } from '@mui/material';
 
-const properties:Array<string> = ["Block height","Transactions","Time", "Block size",]
+const properties:Array<string> = ["Outputs","Amount","Confirmation", "Size",]
 function createData(
-  hash: string,
-  height: number,
-  time: string,
-  transactions: number,
-  size: number,
+  transactionId: string,
+  outputs:number,
+  amount: number,
+  confirmation: number,
+  size: number
 ) {
-  return { hash, height, time, transactions, size };
+  return { transactionId, outputs, amount, confirmation, size };
 }
 
 const rows = [
-  createData('0000011aa506643213a88810a9a369a866a1d12d9fbc8e6ab95f59b1db5975f9', 129942, "1676303411", 4, 1565),
-  createData('0000011aa506643213a88810a9a369a866a1d12d9fbc8e6ab95f59b1db5975f9', 129942, "1676303411", 4, 1565),
-  createData('0000011aa506643213a88810a9a369a866a1d12d9fbc8e6ab95f59b1db5975f9', 129942, "1676303411", 4, 1565),
-  createData('0000011aa506643213a88810a9a369a866a1d12d9fbc8e6ab95f59b1db5975f9', 129942, "1676303411", 4, 1565),
-  createData('0000011aa506643213a88810a9a369a866a1d12d9fbc8e6ab95f59b1db5975f9', 129942, "1676303411", 4, 1565),
+  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
+  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
+  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
+  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
+  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
+  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
+  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
+  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
+  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
+  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
 ];
 
-export default function BlocksList() {
+export default function TransactionList() {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -34,7 +39,7 @@ export default function BlocksList() {
           <TableRow>
             <TableCell>
             <Typography variant='body1'> 
-              Block Hash
+              Transaction Id
               </Typography>
               </TableCell>
             {
@@ -51,28 +56,27 @@ export default function BlocksList() {
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              onClick={()=>{}}
-              key={row.hash}
+              key={row.transactionId}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
                <TableCell component="th" scope="row">
               <Typography variant='body1'> 
-                {row.hash}
+                {row.transactionId}
                 </Typography>
               </TableCell>
               <TableCell component="th" scope="row">
               <Typography variant='body1'> 
-                {row.height}
+                {row.outputs}
                 </Typography>
               </TableCell>
               <TableCell align="left">
               <Typography variant='body1'> 
-                {row.transactions}
+                {row.amount}
               </Typography>
                 </TableCell>
               <TableCell align="left">
               <Typography variant='body1'> 
-                {row.time}
+                {row.confirmation}
               </Typography>
                 </TableCell>
               <TableCell align="left">

@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Footer from "../../Layout/Footer"
 import BlocksList from "./BlocksList";
+import TransactionList from "./TransactionList";
 
 
 
@@ -22,7 +23,10 @@ function DashboardPage() {
           Blocks
         </Typography>
         <BlocksList />
-
+        <Typography paddingTop={2} variant="h5" component="h1" gutterBottom>
+          Transactions
+        </Typography>
+        <TransactionList />
       </Container>
       <Footer />
     </>
