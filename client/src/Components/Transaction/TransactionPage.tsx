@@ -3,10 +3,17 @@ import Footer from "../../Layout/Footer"
 import Header from "../../Layout/Header"
 import { Container } from "@mui/system"
 import CssBaseline from '@mui/material/CssBaseline';
+import { Box } from "@mui/material";
 
 function TransactionPage() {
   return (
-    <>
+    <Box
+    sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      minHeight: '100vh',
+    }}
+    >
       <Helmet>
         <title>Transaction</title>
       </Helmet>
@@ -16,7 +23,7 @@ function TransactionPage() {
 
       </Container>
       <Footer />
-    </>
+    </Box>
   )
 }
 

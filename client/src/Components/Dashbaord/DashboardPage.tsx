@@ -1,5 +1,6 @@
 import React from "react"
 import { Helmet } from "react-helmet-async"
+import { Box } from "@mui/system";
 import Header from "../../Layout/Header"
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
@@ -12,7 +13,13 @@ import TransactionList from "./TransactionList";
 
 function DashboardPage() {
   return (
-    <>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+      }}
+      >
       <Helmet>
         <title>Explore Bitcoin</title>
       </Helmet>
@@ -27,9 +34,9 @@ function DashboardPage() {
           Transactions
         </Typography>
         <TransactionList />
+        <Footer />
       </Container>
-      <Footer />
-    </>
+    </Box>
     
   )
 }

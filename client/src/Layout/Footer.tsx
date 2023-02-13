@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
-import { Divider } from '@mui/material';
+import { Divider, PropTypes } from '@mui/material';
 
 function Copyright() {
   return (
@@ -17,15 +17,9 @@ function Copyright() {
   );
 }
 
-export default function Footer() {
+export default function Footer({}) {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        // minHeight: '20vh',
-      }}
-    >
+    <>
       <Divider  />
      <Box
         component="footer"
@@ -46,6 +40,6 @@ export default function Footer() {
           <Copyright />
         </Container>
       </Box>
-    </Box>
+    </>
   );
 }
