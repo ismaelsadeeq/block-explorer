@@ -60,7 +60,7 @@ export default function TransactionList() {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
                <TableCell component="th" scope="row">
-              <Typography variant='body1'> 
+              <Typography variant='body1' style={{textDecoration:"underline"}} > 
                 {row.transactionId}
                 </Typography>
               </TableCell>

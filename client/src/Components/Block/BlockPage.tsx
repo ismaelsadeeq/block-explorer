@@ -3,7 +3,8 @@ import Footer from "../../Layout/Footer"
 import Header from "../../Layout/Header"
 import { Button, CssBaseline, Box, Typography, IconButton } from "@mui/material"
 import { Container } from "@mui/system"
-import { ArrowBack, ArrowBackIosNewRounded } from "@mui/icons-material"
+import {  ArrowBackIosNewRounded } from "@mui/icons-material"
+import BlockView from "./BlockView"
 
 function Block() {
   return (
@@ -35,9 +36,9 @@ function Block() {
           Block
         </Typography>
         </Container>
+        <BlockView />
 
 
-        
       </Container>
       <Footer />
     </Box>
