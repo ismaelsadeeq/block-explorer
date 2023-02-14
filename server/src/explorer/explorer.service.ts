@@ -4,7 +4,7 @@ import { ResponseData } from 'src/response-handler/interface/response.handler.in
 import { ResponseHandlerService } from 'src/response-handler/response-handler.service';
 import { Meta } from 'src/response-handler/interface/response.handler.interface';
 import { responseType } from 'src/bitcoind-interface/interface';
-import { decodedBase58Check } from './interface';
+import { decodedBase58Check, searchType } from './interface';
 import * as crypto from 'crypto';
 import { bech32, Decoded } from 'bech32';
 
@@ -225,7 +225,7 @@ export class ExplorerService {
       const parameters:Array<string |boolean> = [transactionId,true]
 
        //Get the transaction from bitcoin node service
-      const transaction:string = (await this.bitcoindService.bitcoindGet(method,parameters)).data.result
+      const transaction:any = (await this.bitcoindService.bitcoindGet(method,parameters)).data.result
   
       const response:Meta = {
         status:true,
@@ -308,8 +308,118 @@ export class ExplorerService {
       return this.responseHandlerService.responseBody({},response)
     }
   }
+  async getType(value:string):Promise<ResponseData>{
 
 
+    let data:searchType;
+
+    let response:Meta = {
+      status:true,
+      message:"success",
+      pagination:undefined
+    }
+    let method:string 
+       
+    let parameters:Array<number | boolean | string>;
+
+
+    // Check Block Height  
+    try  {
+      //Declare the method for getting the block hash and add the block height as the paramether
+      method = "getblockhash"
+      let height = Number(value);
+      Logger.log(height)
+      if (Number.isNaN(height)){
+          throw 'Invalid Block height'
+      }
+      parameters = [height]
+      
+      //Get the block hash of the height
+      const blockHash = (await this.bitcoindService.bitcoindGet(method,parameters)).data.result
+      Logger.log(blockHash)
+      if(blockHash.length>0){
+        data = {
+          type:"block",
+          hash:blockHash
+      }
+        return this.responseHandlerService.responseBody(data,response);
+      }
+
+    }catch(error:unknown){
+        Logger.log(error)
+    }
+
+     // Check block Hash
+    try  {
+      method = 'getblock'
+      parameters = [value,true];
+      const block:any =  (await this.bitcoindService.bitcoindGet(method,parameters)).data.result
+      if(block.hash !== null){
+        data = {
+          type:"block",
+          hash:block.hash
+        }
+        return this.responseHandlerService.responseBody(data,response);
+      }
+    }catch(error:unknown){
+      Logger.log(error)
+    }
+
+     //Check Transaction
+    try  {
+     
+      method = 'getrawtransaction';
+      parameters = [value,true]
+
+       //Get the transaction from bitcoin node service
+      const transaction = (await this.bitcoindService.bitcoindGet(method,parameters)).data.result
+
+      if(transaction.txId !== null){
+        data = {
+          type:"transaction"
+        }
+        return this.responseHandlerService.responseBody(data,response);
+      }
+      }catch(error:unknown){
+        Logger.log(error)
+      }
+      // Check Address
+      try {
+      //  Parse an address into a scriptHash
+       const scriptHash:string = this.scriptHash(value);
+
+       // Add the script hash to the parameters
+       const params:Array<string> = [scriptHash];
+ 
+       // Declare the electrs method to get balance
+       const electrsMethod:string = "blockchain.scripthash.get_balance";
+ 
+ 
+       //Get the balance from bitcoin node service
+      const balance:any = await this.bitcoindService.electr(params,electrsMethod)
+      if(balance.confirmed !== null && balance.confirmed !== undefined){
+        data = {
+          type:"address"
+        }
+        return this.responseHandlerService.responseBody(data,response);
+      }
+      response.status = false;
+      response.message = "failed to get type",
+      data = {
+        type:"fail"
+      }
+      return this.responseHandlerService.responseBody(data,response)
+    }catch(error:unknown){
+      Logger.log(error)
+      const response:Meta = {
+        status:false,
+        message:"failed to get type",
+        pagination:undefined
+      }
+      return this.responseHandlerService.responseBody({},response)
+    }
+  }
+  
 
 
   //HELPER METHODS FOR CREATING SCRIPT HASH FROM AN ADDRESS
@@ -434,4 +544,5 @@ export class ExplorerService {
         return this.SEGWIT_VERSION_1
     }
   }
+
 }

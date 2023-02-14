@@ -5,3 +5,8 @@ export interface decodedBase58Check {
   data:string,
   prefix:string
 }
+
+export interface searchType {
+  type:string
+  hash?:string
+}

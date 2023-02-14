@@ -48,4 +48,9 @@ export class ExplorerController {
   async getAddressTransactions(@Param('address') address:string):Promise<ResponseData>{
     return this.explorerService.getAddressTransactions(address);
   }
+  @Get('get-type/:value')
+  @HttpCode(HttpStatus.OK)
+  async getType(@Param('value') value:string):Promise<ResponseData>{
+    return this.explorerService.getType(value);
+  }
 }

@@ -15,21 +15,24 @@ export class BitcoindInterfaceService {
   ){}
 
   async bitcoindGet(method:string,params:Array<any>):Promise<responseType<any,any>>{
+    try {
+      // create a payload of bitcoind parameters with the getConfig class
+      const payload:configData = new getConfig(params,method).getConfig(); 
+      // call the bitcoin-d rpc via  http service post request.
+      const response:responseType<any,any> = await firstValueFrom(
 
-    // create a payload of bitcoind parameters with the getConfig class
-    const payload:configData = new getConfig(params,method).getConfig(); 
-    // call the bitcoin-d rpc via  http service post request.
-    const response:responseType<any,any> = await firstValueFrom(
+        this.httpService.post(process.env.URL,JSON.stringify(payload)).pipe(
+          catchError((error: AxiosError) => {
+            Logger.error(error.response.data);
+              throw 'An error happened!';
+            }),
 
-      this.httpService.post(process.env.URL,JSON.stringify(payload)).pipe(
-        catchError((error: AxiosError) => {
-          Logger.error(error.response.data);
-            throw 'An error happened!';
-          }),
-
-        ),
-    );
-    return response;
+          ),
+      );
+      return response; 
+    } catch (error) {
+      return error
+    }
   }
   async electr(params :Array<string>,method:string): Promise<any> {
 
