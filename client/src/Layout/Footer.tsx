@@ -1,9 +1,8 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
-import { Divider, PropTypes } from '@mui/material';
+import { Divider } from '@mui/material';
 
 function Copyright() {
   return (
@@ -17,7 +16,7 @@ function Copyright() {
   );
 }
 
-export default function Footer({}) {
+export default function Footer() {
   return (
     <>
       <Divider  />
