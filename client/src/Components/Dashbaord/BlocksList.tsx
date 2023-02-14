@@ -5,24 +5,26 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { CircularProgress, Typography } from '@mui/material';
+import { Button, CircularProgress, Typography } from '@mui/material';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-const properties:Array<string> = ["Block height","Transactions","Time", "Block size",]
-export default function BlocksList({blocks}:{blocks:any}) {
-  if(blocks === null){
-    return( 
-    <>
-      <CircularProgress style={{color:'white'}}/>
-    </>
+const properties: Array<string> = ["Block height", "Transactions", "Time", "Block size",]
+export default function BlocksList({ blocks }: { blocks: any }) {
+  const navigate: NavigateFunction = useNavigate()
+  if (blocks === null) {
+    return (
+      <>
+        <CircularProgress style={{ color: 'white' }} />
+      </>
     )
   }
-  if(blocks.length ===0){
-    return(
-    <>
-    <Typography>
-      Something went wrong could not get blocks
-    </Typography>
-    </>
+  if (blocks.length === 0) {
+    return (
+      <>
+        <Typography>
+          Something went wrong could not get blocks
+        </Typography>
+      </>
     )
   }
   return (
@@ -31,15 +33,15 @@ export default function BlocksList({blocks}:{blocks:any}) {
         <TableHead>
           <TableRow>
             <TableCell>
-            <Typography variant='body1'> 
-              Block Hash
+              <Typography variant='body1'>
+                Block Hash
               </Typography>
-              </TableCell>
+            </TableCell>
             {
-              properties.map((property)=>{
-                return   <TableCell align="left">
-                  <Typography variant='body1'> 
-                  {property}
+              properties.map((property) => {
+                return <TableCell align="left">
+                  <Typography variant='body1'>
+                    {property}
                   </Typography>
                 </TableCell>
               })
@@ -47,39 +49,43 @@ export default function BlocksList({blocks}:{blocks:any}) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {blocks.map((row:any) => (
-            <TableRow
-              onClick={()=>{}}
+          {blocks.map((row: any) => {
+            let time:Date = new Date(0)
+            time.setUTCSeconds(row.time)
+            return <TableRow
+              onClick={() => { }}
               key={row.hash}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-               <TableCell component="th" scope="row">
-              <Typography variant='body1' style={{textDecoration:"underline",color:'lightBlue'}} > 
-                {row.hash}
-                </Typography>
+              <TableCell component="th" scope="row">
+                <Button onClick={() => {
+                  navigate('/block/' + row.hash)
+                }} style={{ textDecoration: "underline", color: 'lightBlue' }} >
+                  {row.hash}
+                </Button>
               </TableCell>
               <TableCell component="th" scope="row">
-              <Typography variant='body1'> 
-                {row.height}
+                <Typography variant='body1'>
+                  {row.height}
                 </Typography>
               </TableCell>
               <TableCell align="left">
-              <Typography variant='body1'> 
-                {row.transactions}
-              </Typography>
-                </TableCell>
-              <TableCell align="left">
-              <Typography variant='body1'> 
-                {row.time}
-              </Typography>
-                </TableCell>
-              <TableCell align="left">
-              <Typography variant='body1'> 
-                {row.size}
+                <Typography variant='body1'>
+                  {row.nTx}
                 </Typography>
-                </TableCell>
+              </TableCell>
+              <TableCell align="left">
+                <Typography variant='body1'>
+                  {time.toLocaleString()}
+                </Typography>
+              </TableCell>
+              <TableCell align="left">
+                <Typography variant='body1'>
+                  {row.size} Bytes
+                </Typography>
+              </TableCell>
             </TableRow>
-          ))}
+          })}
         </TableBody>
       </Table>
     </TableContainer>

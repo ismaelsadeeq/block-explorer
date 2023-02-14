@@ -5,10 +5,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { CircularProgress,Typography } from '@mui/material';
+import { Button, CircularProgress,Typography } from '@mui/material';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 const properties:Array<string> = ["Outputs","Amount","Confirmation", "Size",]
 export default function TransactionList({transactions}:{transactions:any}) {
+  const navigate:NavigateFunction =  useNavigate();
   if(transactions === null){
     return( 
     <>
@@ -57,9 +59,11 @@ export default function TransactionList({transactions}:{transactions:any}) {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
                <TableCell component="th" scope="row">
-              <Typography variant='body1' style={{textDecoration:"underline",color:'lightBlue'}} > 
+              <Button onClick={()=>{
+                navigate('/transaction/'+row.txid)
+              }}  style={{textDecoration:"underline",color:'lightBlue'}} > 
                 {row.txid}
-                </Typography>
+                </Button>
               </TableCell>
               <TableCell component="th" scope="row">
               <Typography variant='body1'> 
