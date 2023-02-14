@@ -230,6 +230,7 @@ export const myTheme = createTheme(
         lineHeight: 24 / 14,
         fontSize: pxToRem(14),
         textTransform: 'capitalize',
+        color:"white"
       }
     }
   },

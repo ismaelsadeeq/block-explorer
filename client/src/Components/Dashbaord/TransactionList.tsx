@@ -22,7 +22,7 @@ export default function TransactionList({transactions}:{transactions:any}) {
     return(
     <>
     <Typography>
-      Something went wrong could not get blocks
+      Something went wrong could not get transactions
     </Typography>
     </>
     )

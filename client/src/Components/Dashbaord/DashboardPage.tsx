@@ -21,6 +21,7 @@ function DashboardPage() {
     const blocks =  await getRequest(method)
     method = url+"/top-transactions";
     const trxs =  await getRequest(method);
+
     setBlocks(blocks)
     setTransactions(trxs)
   }

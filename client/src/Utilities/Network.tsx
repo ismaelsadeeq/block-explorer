@@ -6,7 +6,7 @@ export const getRequest =  async (method:string):Promise<any> => {
   try {
     return (await axios.get(method)).data.data;
   }catch(err:any){
-    return err
+    return []
   }
 }
 
