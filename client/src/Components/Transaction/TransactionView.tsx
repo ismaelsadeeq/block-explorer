@@ -183,7 +183,7 @@ function TransactionView() {
         >
            <TableCell component="th" scope="row">
           <Typography variant='h6' color="white"> 
-              Traansaction Size
+              Transaction Size
             </Typography>
           </TableCell>
           <TableCell component="th" scope="row">
@@ -199,7 +199,7 @@ function TransactionView() {
         >
            <TableCell component="th" scope="row">
           <Typography variant='h6' color="white"> 
-              Traansaction Inputs
+              Transaction Inputs
             </Typography>
           </TableCell>
           <TableCell component="th" scope="row">

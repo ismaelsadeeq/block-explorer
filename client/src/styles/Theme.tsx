@@ -184,6 +184,7 @@ export const myTheme = createTheme(
         ...responsiveFontSizes({ sm: 20, md: 24, lg: 24 }),
       },
       h5: {
+        color:"#fff",
         fontWeight: 700,
         lineHeight: 1.5,
         fontSize: pxToRem(18),
