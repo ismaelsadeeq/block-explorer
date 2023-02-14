@@ -132,7 +132,7 @@ export default function Header() {
           {status?
             <div style={{ display: 'flex', marginLeft: '10px' }}>
               <Typography variant="subtitle2" marginTop={1}>
-                Invalid Search
+                No result found
               </Typography>
               <Button onClick={()=>setStatus(false)}>
                 <Cancel style={{ color: "#fff" }} />
