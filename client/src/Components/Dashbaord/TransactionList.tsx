@@ -5,33 +5,26 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Typography } from '@mui/material';
+import { CircularProgress,Typography } from '@mui/material';
 
 const properties:Array<string> = ["Outputs","Amount","Confirmation", "Size",]
-function createData(
-  transactionId: string,
-  outputs:number,
-  amount: number,
-  confirmation: number,
-  size: number
-) {
-  return { transactionId, outputs, amount, confirmation, size };
-}
-
-const rows = [
-  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
-  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
-  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
-  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
-  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
-  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
-  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
-  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
-  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
-  createData('d02e84ca517348cafd4508da8de060eaf00abd17b5c43ca568d94f6c9690b4aa', 2, 1676303411, 1, 1565),
-];
-
-export default function TransactionList() {
+export default function TransactionList({transactions}:{transactions:any}) {
+  if(transactions === null){
+    return( 
+    <>
+      <CircularProgress style={{color:'white'}}/>
+    </>
+    )
+  }
+  if(transactions.length ===0){
+    return(
+    <>
+    <Typography>
+      Something went wrong could not get blocks
+    </Typography>
+    </>
+    )
+  }
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -54,38 +47,42 @@ export default function TransactionList() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow
+          {transactions.map((row:any) => {
+            let sum:number = 0
+            for(let i=0;i<row.vout.length;i++){
+              sum += row.vout[i].value
+            }
+            return <TableRow
               key={row.transactionId}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
                <TableCell component="th" scope="row">
               <Typography variant='body1' style={{textDecoration:"underline",color:'lightBlue'}} > 
-                {row.transactionId}
+                {row.txid}
                 </Typography>
               </TableCell>
               <TableCell component="th" scope="row">
               <Typography variant='body1'> 
-                {row.outputs}
+                {row.vout.length}
                 </Typography>
               </TableCell>
               <TableCell align="left">
               <Typography variant='body1'> 
-                {row.amount}
+                {sum} BTC
               </Typography>
                 </TableCell>
               <TableCell align="left">
               <Typography variant='body1'> 
-                {row.confirmation}
+                {row.confirmations}
               </Typography>
                 </TableCell>
               <TableCell align="left">
               <Typography variant='body1'> 
-                {row.size}
+                {row.size} Bytes
                 </Typography>
                 </TableCell>
             </TableRow>
-          ))}
+            })}
         </TableBody>
       </Table>
     </TableContainer>

@@ -49,7 +49,7 @@ function DashboardPage() {
       <Typography paddingTop={2} variant="h5" component="h1" gutterBottom>
         Transactions
       </Typography>
-      <TransactionList />
+      <TransactionList transactions={transactions} />
     </Container>
     <Footer />
   </Box>
