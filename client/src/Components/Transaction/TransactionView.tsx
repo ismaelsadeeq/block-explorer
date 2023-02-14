@@ -2,11 +2,12 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Typography,Container, Link } from '@mui/material';
-const transaction ={
+import TransactionInputs from './Inputs';
+import TransactionOutputs from './Outputs';
+const transaction = {
   "txid": "018e2ad3cd72c83ab207a07317199886d2e02324982818506ed29675f28fd361",
   "hash": "ba8cacb7df38c689fb97da023ffc6e96e3b72d0bf58f2cb93fb687ec28c99bde",
   "version": 2,
@@ -21,8 +22,15 @@ const transaction ={
               "0000000000000000000000000000000000000000000000000000000000000000"
           ],
           "sequence": 4294967294
+      },
+      {
+        "txid":"67e9b17c580fd9fefbe1576c38b3e2bf4113be9e47b41229d2cc4cda95bcdb34",
+        "vout":0,
+        "scriptSig":{"asm":"","hex":""},
+        "txinwitness":["30440220089083cde58d4bfa46bc9425a8f4e4773fc427c7518390b646da6ebd19c1693202207b49a140dd14e46cbb53a6a6279fbd71121f46bd29cda14362263d93aba70af801","0221a6ac9646b2e95376a04cc223aa6a1175cba046cadcd4126537836656b433e2"],
+        "sequence":4294967294
       }
-  ],
+    ],
   "vout": [
       {
           "value": 50,
@@ -220,27 +228,8 @@ function TransactionView() {
     </TableBody>
   </Table>
 </TableContainer>
-{/* <Typography variant='h5' padding={5}>
-  Transactions
-</Typography>
-  <TableContainer component={Paper}>
-    <Table sx={{ minWidth: 650 }} aria-label="simple table">
-      <TableBody>
-        {transactions.map((tx) => (
-          <TableRow
-            key={tx}
-            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-          >
-            <TableCell component="th" scope="row">
-            <Typography variant='body1' style={{textDecoration:"underline"}}  align="left"> 
-                      {tx}
-                </Typography>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  </TableContainer> */}
+<TransactionInputs />
+<TransactionOutputs />
   </Container>
   )
 }
