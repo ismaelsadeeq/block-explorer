@@ -1,10 +1,23 @@
-## Description
+## Explore-btc [nestjs](https://nestjs.com/) server.
 
-- Explore-btc block explorer backend source code.
 
-- Built with [nestjs](https://nestjs.com/)
 
-## Installation
+
+
+## Installation Guide
+
+- It's expected that software dependencies were installed and have configured to run on signet (Bitcoin core and Electrs).
+
+- Create a .env file.
+- Copy the variables in the .envexample to the .env file
+- Fill the necessary information
+  - PORT the port you want your nestjs to listen to default is 3000
+  - CLIENT_ORIGIN is the array of origins you will allow to have access to the api, default is "*" which means all, but you will want to change that for security reasons if you are going to run in production, but accepting it's will suffice for education and development.
+  - URL is the bitcoin rpc url e.g  http://username:password@host:port/
+  - ELECTR_PORT the port your running electrs server is listening to, e.g 50001
+  - ELECTR_HOST is the host of your electrs if it's installed in your local machine its 127.0.0.1 or the host of your remote host if it's hosted remote..
+
+- - It is expected that [nodejs](https://nodejs.org/en/download/) and node package manager is istalled.
 
 ```bash
 $ npm install
