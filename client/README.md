@@ -1,5 +1,5 @@
 # Explore ₿tc React Client  
-- Note: It is expected that the server setup is completed and running at localhost from any port
+- Note: It is expected that the server setup is completed and running on a host
 
 
 # Installation Guide
