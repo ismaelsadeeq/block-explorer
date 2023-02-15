@@ -4,23 +4,33 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Typography,Container, Link } from '@mui/material';
+import { Typography,Container, Link, CircularProgress } from '@mui/material';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 
-const addressBalance = {
-  "confirmed":200000,
-  "unconfirmed":0
+function AddressView({address,balance,transactions}:{address:any,balance:any,transactions:any}) {
+  const navigate:NavigateFunction = useNavigate();
 
-}
-const transactions =  [
-  "a2e993dba682a3cb0cf279646baf7a07391642db0568e0c808068bab092ccd8a",
-  "a2e993dba682a3cb0cf279646baf7a07391642db0568e0c808068bab092ccd8a"
-]
-function AddressView() {
+  if (transactions === null || balance == null) {
+    return (
+      <>
+        <CircularProgress style={{ color: 'white' }} />
+      </>
+    )
+  }
+  if (transactions.length === 0 || balance.length === 0) {
+    return (
+      <>
+        <Typography>
+          No Data on the block chain for this address
+        </Typography>
+      </>
+    )
+  }
   return (
     <Container>
        <Typography variant='h6' margin={5}>
-      A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
+        {address}
       </Typography>
     <TableContainer component={Paper} >
     <Typography variant='h5' margin={2} >
@@ -39,7 +49,7 @@ function AddressView() {
           </TableCell>
           <TableCell component="th" scope="row">
               <Typography variant='body1'  align="right"> 
-                 {addressBalance.confirmed} {addressBalance.confirmed>1?"Satoshis":"Satoshi"} 
+                 {balance.confirmed} {balance.confirmed>1?"Satoshis":"Satoshi"} 
             </Typography>
           
           </TableCell>
@@ -56,7 +66,7 @@ function AddressView() {
           <TableCell component="th" scope="row">
           <Link >
               <Typography variant='body1'  align="right"> 
-              {addressBalance.unconfirmed}   {addressBalance.unconfirmed>1?"Satoshis":"Satoshi"} 
+              {balance.unconfirmed}   {balance.unconfirmed>1?"Satoshis":"Satoshi"} 
               </Typography>
           </Link> 
           </TableCell>
@@ -70,14 +80,18 @@ function AddressView() {
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableBody>
-            {transactions.map((tx) => (
+            {transactions.map((tx:any) => (
               <TableRow
                 key={tx}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                <Typography variant='body1' style={{textDecoration:"underline",color:"lightblue"}}  align="left"> 
-                          {tx}
+                <Typography 
+                    onClick={()=>{
+                      navigate("/transaction/"+tx.tx_hash,{replace:true})
+                    }}
+                variant='body1' style={{textDecoration:"underline",color:"lightblue"}}  align="left"> 
+                          {tx.tx_hash}
                     </Typography>
                 </TableCell>
               </TableRow>
