@@ -1,4 +1,4 @@
-# Explore BTC React Client  
+# Explore ₿tc React Client  
 - Note: It is expected that the server setup is completed and running at localhost from any port
 
 

@@ -1,13 +1,8 @@
-## Explore-btc [nestjs](https://nestjs.com/) server.
+# Explore ₿tc [nestjs](https://nestjs.com/) server.
+It's expected that software dependencies were installed and have configured to run on signet (Bitcoin core and Electrs).
 
-
-
-
-
-## Installation Guide
-
-- It's expected that software dependencies were installed and have configured to run on signet (Bitcoin core and Electrs).
-
+# Server Installation Guide
+- It is expected that [nodejs](https://nodejs.org/en/download/) and node package manager is istalled.
 - Create a .env file.
 - Copy the variables in the .envexample to the .env file
 - Fill the necessary information
@@ -17,7 +12,6 @@
   - ELECTR_PORT the port your running electrs server is listening to, e.g 50001
   - ELECTR_HOST is the host of your electrs if it's installed in your local machine its 127.0.0.1 or the host of your remote host if it's hosted remote..
 
-- - It is expected that [nodejs](https://nodejs.org/en/download/) and node package manager is istalled.
 
 ```bash
 $ npm install

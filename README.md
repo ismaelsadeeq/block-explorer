@@ -1,4 +1,4 @@
-# ₿itcoin signet block explorer
+# Explore ₿tc  ₿itcoin signet block explorer
   The bitcoin signet block explorer will provide information about the current signet blockchain
 
   - Features
