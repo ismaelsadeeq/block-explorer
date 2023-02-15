@@ -4,82 +4,337 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Typography,Container, Link } from '@mui/material';
+import { Typography,Container, Link, CircularProgress } from '@mui/material';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-interface blk  {
-  "hash": string,
-  "confirmations": number,
-  "height": number,
-  "version": number,
-  "versionHex": string,
-  "merkleroot": string,
-  "time": number,
-  "mediantime": number,
-  "nonce": number,
-  "bits": string,
-  "difficulty": number,
-  "chainwork": string,
-  "nTx": number,
-  "previousblockhash": string,
-  "strippedsize": number,
-  "size": number,
-  "weight": number,
-  // "tx":string[]
-}
-const properties = [
-  {"title": "Block Hash","value":"000000d7c6d0ae8353f8cf9d9dd36fdab9ae450a659b496e2ab327d4d0c22f62"},
-  {"title": "Block Confirmations","value":"1"},
-  {"title": "Block Height","value":"129962"},
-  {"title": "Version","value":"536870912"},
-  {"title": "Version Hex","value":"20000000"},
-  {"title": "Merkleroot","value":"a2e993dba682a3cb0cf279646baf7a07391642db0568e0c808068bab092ccd8a"},
-  {"title": "Time","value":"1676315993"},
-  {"title": "Median Time","value":"1676314475"},
-  {"title": "Nonce","value":"2121471"},
-  {"title": "Bits","value":"1e014204"},
-  {"title": "Difficulty","value":"0.003105391985904217"},
-  {"title": "Chainwork","value":"00000000000000000000000000000000000000000000000000000171c79922a0"},
-  {"title": "Transactions","value":"1"},
-  {"title": "Previous Block Hash","value":"000000ec3b7649d99509bd42109c907535826176e77c6160936b7272238e00bf"},
-  {"title": "Stripped Size","value":"318"},
-  {"title": "Size","value":"354"},
-  {"title": "Weight","value":"318"}]
-const transactions =  [
-      "a2e993dba682a3cb0cf279646baf7a07391642db0568e0c808068bab092ccd8a"
-  ]
 
-export default function TransactionList() {
+export default function TransactionList({block}:{block:any}) {
+  const navigate:NavigateFunction = useNavigate()
+
+  if (block === null) {
+    return (
+      <>
+        <CircularProgress style={{ color: 'white' }} />
+      </>
+    )
+  }
+  if (block.length === 0) {
+    return (
+      <>
+        <Typography>
+          Something went wrong could not get block
+        </Typography>
+      </>
+    )
+  }
+  let time:Date = new Date();
+  time.setUTCSeconds(block.time)
+  let medianTime:Date = new Date();
+  medianTime.setUTCSeconds(block.mediantime)
   return (
     <Container>
         <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableBody>
-          {properties.map((property) => (
             <TableRow
-              key={property.title}
+              key="Block Hash"
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
                <TableCell component="th" scope="row">
               <Typography variant='body1'> 
-              {property.title}
+              Block Hash
                 </Typography>
               </TableCell>
               <TableCell component="th" scope="row">
-                {
-                  property.title =="Previous Block Hash"?
-                    <Link >
-                      <Typography variant='body1' style={{textDecoration:"underline",color:'lightBlue'}}  align="right"> 
-                          {property.value}
-                    </Typography>
-               </Link>:
                   <Typography variant='body1'  align="right"> 
-                     {property.value}
+                     {block.hash}
                 </Typography>
-                }
               
               </TableCell>
             </TableRow>
-          ))}
+            <TableRow
+              key="Block Confirmations"
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+               <TableCell component="th" scope="row">
+              <Typography variant='body1'> 
+              Block Confirmations
+                </Typography>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                  <Typography variant='body1'  align="right"> 
+                     {block.confirmations}
+                </Typography>
+              
+              </TableCell>
+            </TableRow>
+            <TableRow
+              key="Block Height"
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+               <TableCell component="th" scope="row">
+              <Typography variant='body1'> 
+              Block Height
+                </Typography>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                  <Typography variant='body1'  align="right"> 
+                     {block.height}
+                </Typography>
+              
+              </TableCell>
+            </TableRow>
+            <TableRow
+              key="Block Version"
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+               <TableCell component="th" scope="row">
+              <Typography variant='body1'> 
+              Version
+                </Typography>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                  <Typography variant='body1'  align="right"> 
+                     {block.version}
+                </Typography>
+              
+              </TableCell>
+            </TableRow>
+            <TableRow
+              key="Block Version Hex"
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+               <TableCell component="th" scope="row">
+              <Typography variant='body1'> 
+              Version Hex
+                </Typography>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                  <Typography variant='body1'  align="right"> 
+                     {block.versionHex}
+                </Typography>
+              
+              </TableCell>
+            </TableRow>
+            <TableRow
+              key="Block  Merkle Root"
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+               <TableCell component="th" scope="row">
+              <Typography variant='body1'> 
+              Merkle Root
+                </Typography>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                  <Typography variant='body1'  align="right"> 
+                     {block.merkleroot}
+                </Typography>
+              
+              </TableCell>
+            </TableRow>
+            <TableRow
+              key="Block Time"
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+               <TableCell component="th" scope="row">
+              <Typography variant='body1'> 
+              Time
+                </Typography>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                  <Typography variant='body1'  align="right"> 
+                     {time.toLocaleString()}
+                </Typography>
+              
+              </TableCell>
+            </TableRow>
+            <TableRow
+              key="Block Median Time"
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+               <TableCell component="th" scope="row">
+              <Typography variant='body1'> 
+                Median Time
+                </Typography>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                  <Typography variant='body1'  align="right"> 
+                     {medianTime.toLocaleString()}
+                </Typography>
+              
+              </TableCell>
+            </TableRow>
+            <TableRow
+              key="Block Nonce"
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+               <TableCell component="th" scope="row">
+              <Typography variant='body1'> 
+              Nonce
+                </Typography>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                  <Typography variant='body1'  align="right"> 
+                     {block.nonce}
+                </Typography>
+              
+              </TableCell>
+            </TableRow>
+            <TableRow
+              key="Block Bits"
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+               <TableCell component="th" scope="row">
+              <Typography variant='body1'> 
+              Bits
+                </Typography>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                  <Typography variant='body1'  align="right"> 
+                     {block.bits}
+                </Typography>
+              
+              </TableCell>
+            </TableRow>
+            <TableRow
+              key="Block Difficulty"
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+               <TableCell component="th" scope="row">
+              <Typography variant='body1'> 
+              Difficulty
+                </Typography>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                  <Typography variant='body1'  align="right"> 
+                     {block.difficulty}
+                </Typography>
+              
+              </TableCell>
+            </TableRow>
+            <TableRow
+              key="Block Chainwork"
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+               <TableCell component="th" scope="row">
+              <Typography variant='body1'> 
+              Chain Work
+                </Typography>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                  <Typography variant='body1'  align="right"> 
+                     {block.chainwork}
+                </Typography>
+              
+              </TableCell>
+            </TableRow>
+            <TableRow
+              key="Block Transactions"
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+               <TableCell component="th" scope="row">
+              <Typography variant='body1'> 
+              Transactions
+                </Typography>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                  <Typography variant='body1'  align="right"> 
+                     {block.nTx}
+                </Typography>
+              
+              </TableCell>
+            </TableRow>
+           
+            <TableRow
+              key="Previous Block Hash"
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+               <TableCell component="th" scope="row">
+              <Typography variant='body1'> 
+              Previous Block Hash
+                </Typography>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                    <Link  onClick={()=>{
+                      navigate('/block/'+block.previousblockhash,{replace:true})
+                    }}>
+                      <Typography variant='body1' style={{textDecoration:"underline",color:'lightBlue'}}  align="right"> 
+                          {block.previousblockhash}
+                    </Typography>
+               </Link>
+              
+              </TableCell>
+            </TableRow>
+            {
+              block.nextblockhash !== undefined ?
+              <TableRow
+                key="Next Block Hash"
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+              <TableCell component="th" scope="row">
+              <Typography variant='body1'> 
+              Next Block Hash
+                </Typography>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                    <Link onClick={()=>{
+                      navigate('/block/'+block.nextblockhash)
+                    }}>
+                      <Typography variant='body1' style={{textDecoration:"underline",color:'lightBlue'}}  align="right"> 
+                          {block.nextblockhash}
+                    </Typography>
+               </Link>
+              
+              </TableCell>
+              </TableRow> :
+              null
+            }
+            <TableRow
+              key=" Stripped Size"
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+               <TableCell component="th" scope="row">
+              <Typography variant='body1'> 
+              Stripped Size
+                </Typography>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                  <Typography variant='body1'  align="right"> 
+                     {block.strippedsize}
+                </Typography>
+              
+              </TableCell>
+            </TableRow>
+            <TableRow
+              key="Block Hash Size"
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+               <TableCell component="th" scope="row">
+              <Typography variant='body1'> 
+                Size
+                </Typography>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                  <Typography variant='body1'  align="right"> 
+                      {block.size} bytes
+                </Typography>
+              </TableCell>
+            </TableRow>
+            <TableRow
+              key="Block Hash Weights"
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+               <TableCell component="th" scope="row">
+              <Typography variant='body1'> 
+                Weight
+                </Typography>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                  <Typography variant='body1'  align="right"> 
+                      {block.weight} wu
+                </Typography>
+              </TableCell>
+            </TableRow>
         </TableBody>
       </Table>
     </TableContainer>
@@ -89,13 +344,15 @@ export default function TransactionList() {
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableBody>
-            {transactions.map((tx) => (
+            {block.tx.map((tx:any) => (
               <TableRow
                 key={tx}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                <Typography variant='body1' style={{textDecoration:"underline",color:"lightblue"}}  align="left"> 
+                <Typography onClick={()=>{
+                      navigate('/transaction/'+tx)
+                    }} variant='body1' style={{textDecoration:"underline",color:"lightblue"}}  align="left"> 
                           {tx}
                     </Typography>
                 </TableCell>

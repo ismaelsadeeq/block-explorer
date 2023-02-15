@@ -5,8 +5,24 @@ import { Button, CssBaseline, Box, Typography, IconButton } from "@mui/material"
 import { Container } from "@mui/system"
 import {  ArrowBackIosNewRounded } from "@mui/icons-material"
 import BlockView from "./BlockView"
+import { useEffect, useState } from "react"
+import { url } from "../../Utilities/util"
+import { NavigateFunction, useNavigate, useParams } from "react-router-dom"
+import { getRequest } from "../../Utilities/Network"
 
 function Block() {
+
+  const navigate:NavigateFunction = useNavigate()
+  const [block,setBlock] = useState(null)
+  const {hash}  =  useParams()
+  async function getData(){
+    let method:string = url + "/search-block-hash/" + hash
+    const block = await getRequest(method)
+    setBlock(block)
+  }
+  useEffect(()=>{
+   getData()
+  },[hash])
   return (
     <Box
       sx={{
@@ -27,7 +43,9 @@ function Block() {
           display:'flex',
           justifyContent:'space-between'
         }}>
-          <Button >
+          <Button onClick={()=>{
+            navigate(-1)
+          }} >
            <IconButton >
               <ArrowBackIosNewRounded />
            </IconButton>
@@ -36,8 +54,7 @@ function Block() {
           Block
         </Typography>
         </Container>
-        <BlockView />
-
+        <BlockView  block={block}/>
 
       </Container>
       <Footer />
