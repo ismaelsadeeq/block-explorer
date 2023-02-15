@@ -96,6 +96,9 @@ export default function Header() {
       <AppBar position="fixed">
         <Toolbar>
           <IconButton
+            onClick={()=>{
+              navigate('/',{replace:true})
+            }}
             size="large"
             edge="start"
             color="inherit"
