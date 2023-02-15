@@ -328,7 +328,6 @@ export class ExplorerService {
       //Declare the method for getting the block hash and add the block height as the paramether
       method = "getblockhash"
       let height = Number(value);
-      Logger.log(height)
       if (Number.isNaN(height)){
           throw 'Invalid Block height'
       }
@@ -336,7 +335,6 @@ export class ExplorerService {
       
       //Get the block hash of the height
       const blockHash = (await this.bitcoindService.bitcoindGet(method,parameters)).data.result
-      Logger.log(blockHash)
       if(blockHash.length>0){
         data = {
           type:"block",
