@@ -14,8 +14,8 @@
  
 ## The explorer is has two applications client and server
 
-## Client application built with React (Typescript) ❤️ 
-## Server application built with N (esjs (Typescript) ❤️ 
+- Client application built with [Reactjs](https://reactjs.org/) (Typescript) ❤️ 
+- Server application built with [Nestjs](https://docs.nestjs.com/) (Typescript) ❤️ 
 
 
 
