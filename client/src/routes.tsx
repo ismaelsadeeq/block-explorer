@@ -1,4 +1,4 @@
-import { useRoutes } from "react-router-dom";
+import { Navigate, useRoutes } from "react-router-dom";
 import DashboardPage from "./Components/Dashbaord/DashboardPage";
 import Block from "./Components/Block/BlockPage";
 import TransactionPage from "./Components/Transaction/TransactionPage";
@@ -12,7 +12,7 @@ export default function Router (){
       {
         path:'/',
         element:<DashboardPage />,
-        index:true
+        index:true,
       },
       {
         path:'block/:hash',
@@ -25,8 +25,11 @@ export default function Router (){
       {
         path:'address/:address',
         element:<AddressPage />
+      },
+      {
+        path:"*",
+        element: <Navigate to="/" replace />,
       }
-
     ]
     ) 
 }
