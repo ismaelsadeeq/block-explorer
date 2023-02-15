@@ -7,7 +7,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {  Typography } from '@mui/material';
 
-const properties:Array<string> = ["Locking Script","Locking Script Type","Address",]
+const properties:Array<string> = ["Locking Script","Value","Locking Script Type","Address",]
 
 
 const outputs =  [
@@ -34,7 +34,17 @@ const outputs =  [
   }
 ]
 
-function TransactionOutputs() {
+function TransactionOutputs({outputs}:{outputs:any}) {
+  if(outputs === undefined){
+    return <>
+    
+    </>
+  }
+  if(outputs === null){
+    return <>
+    
+    </>
+  }
   return (
     <div>
       <Typography variant='h5' padding={2} style={{textDecoration:'underline'}}>
@@ -57,7 +67,7 @@ function TransactionOutputs() {
           </TableRow>
         </TableHead>
       <TableBody>
-        {outputs.map((output) => (
+        {outputs.map((output:any) => (
           <TableRow
             key={output.scriptPubKey.asm}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -68,6 +78,11 @@ function TransactionOutputs() {
                 {output.scriptPubKey.asm}
               </Typography>
       
+            </TableCell>
+            <TableCell component="th" scope="row">
+            <Typography variant='body1' align="left"> 
+              {output.value}
+            </Typography>
             </TableCell>
             <TableCell component="th" scope="row">
             <Typography variant='body1' align="left"> 

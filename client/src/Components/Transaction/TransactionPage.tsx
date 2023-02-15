@@ -5,8 +5,24 @@ import { Button, CssBaseline, Box, Typography, IconButton } from "@mui/material"
 import { Container } from "@mui/system"
 import {  ArrowBackIosNewRounded } from "@mui/icons-material"
 import TransactionView from "./TransactionView"
+import { NavigateFunction, useNavigate, useParams } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { url } from "../../Utilities/util"
+import { getRequest } from "../../Utilities/Network"
 
 function TransactionPage() {
+
+  const navigate:NavigateFunction =  useNavigate()
+  const [transaction,setTransaction] = useState(null)
+  const {id}  =  useParams()
+  async function getData(){
+    let method:string = url + "/search-transaction/" + id
+    const block = await getRequest(method)
+    setTransaction(block)
+  }
+  useEffect(()=>{
+   getData()
+  },[id])
   return (
     <Box
       sx={{
@@ -27,7 +43,9 @@ function TransactionPage() {
           display:'flex',
           justifyContent:'space-between'
         }}>
-          <Button >
+          <Button onClick={()=>{
+            navigate(-1)
+          }} >
            <IconButton >
               <ArrowBackIosNewRounded />
            </IconButton>
@@ -36,7 +54,7 @@ function TransactionPage() {
           Transaction
         </Typography>
         </Container>
-        <TransactionView/>
+        <TransactionView transaction={transaction}/>
 
       </Container>
       <Footer />
