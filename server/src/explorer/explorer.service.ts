@@ -20,8 +20,8 @@ export class ExplorerService {
   private readonly OP_CHECKSIG:string ="ac";
   private readonly TO_PUSH:string = '14';
   private readonly OP_EQUAL:string = "87";
-  private readonly SEGWIT_VERSION_0 = "00";
-  private readonly SEGWIT_VERSION_1 = "51";
+  private readonly SEGWIT_VERSION_0:string = "00";
+  private readonly SEGWIT_VERSION_1:string = "51";
 
   constructor(
     private readonly responseHandlerService:ResponseHandlerService = ResponseHandlerService.instance,
