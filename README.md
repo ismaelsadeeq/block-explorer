@@ -31,7 +31,20 @@ Server application is inside the server folder,
 (Follow the installation guide in the folders readme for seamless installation)
 
 
+This project is built during [Qala](https://qala.dev) bitcoin development training cohort, a program training African software engineers transitioning to bitcoin and open source software development.
+ 
 
-Feel free to create a PR for improvement or open an issue if you encounter one
+## Stay in touch
+
+- Twitter 
+- [@Qala](https://twitter.com/QalaAfrica)
+- [@Abubakar Sadiq Ismail](https://twitter.com/sadeeq_ismaela)
+
+## License
+
+Sat pay is licenced [MIT licensed](LICENSE).
+
+Feel free to create a PR for improvement or open an issue if you encounter one.
 
 Happy Hacking ❤️ 
+
