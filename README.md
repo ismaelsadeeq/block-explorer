@@ -1,5 +1,5 @@
-# Explore ₿tc  ₿itcoin signet block explorer
-  The bitcoin signet block explorer will provide information about the current signet blockchain
+# Explore ₿tc block explorer
+  The bitcoin block explorer will provide information about the current blockchain
 
   - Features
     - Top Blocks

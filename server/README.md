@@ -1,8 +1,10 @@
 # Explore ₿tc [nestjs](https://nestjs.com/) server.
-It's expected that software dependencies were installed and have configured to run on signet (Bitcoin core and Electrs).
+It's expected that software dependencies were installed and have configured to run on mainnet,signet, testnet or regtest (Bitcoin core and Electrs).
 
 # Server Installation Guide
 - It is expected that [nodejs](https://nodejs.org/en/download/) and node package manager is istalled.
+- In bitcoin.conf file ensure you added txindex, rpc auth and fall back fee options.
+- Connect Electrs to bitcoin core
 - Create a .env file.
 - Copy the variables in the .envexample to the .env file
 - Fill the necessary information
