@@ -21,7 +21,7 @@
 
 ### Software Dependencies needed to run this explorer
 - [Bitcoin core](https://github.com/bitcoin/bitcoin)
-    Bitcoin core software is needed and configured in signet mode, enable rpc calls to get information from the bitcoin signet network
+    Bitcoin core software is needed and configured in signet, main net, test net, or regtest  mode, enable rpc calls to get information from the bitcoin network
 - [Electrs client](https://github.com/romanz/electrs)
     Electrs Indexer is needed to get information about a bitcoin address (scriptPubKey). 
 
