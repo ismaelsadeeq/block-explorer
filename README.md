@@ -27,8 +27,9 @@
 
 
 Client application is inside the client folder,
+[Follow the guide here to install the client app](https://github.com/ismaelsadeeq/block-explorer/tree/main/client#installation-guide)
 Server application is inside the server folder,
-(Follow the installation guide in the folders readme for seamless installation)
+[Follow the guide here to install the server app](https://github.com/ismaelsadeeq/block-explorer/tree/main/server#server-installation-guide)
 
 
 This project is built during [Qala](https://qala.dev) bitcoin development training cohort, a program training African software engineers transitioning to bitcoin and open source software development.
