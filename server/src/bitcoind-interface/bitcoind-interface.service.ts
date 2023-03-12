@@ -8,7 +8,7 @@ import { HttpService } from '@nestjs/axios';
 @Injectable()
 export class BitcoindInterfaceService {
 
-  private readonly ElectrumCli:any = require('electrum-client')
+  private readonly ElectrumCli:any = require('electrs-client')
 
   constructor(
     private readonly httpService: HttpService,
